@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacking Simulation</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .banner {
+            text-align: center;
+            background-color: red;
+            padding: 20px;
+        }
+        .banner h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .banner p {
+            font-size: 18px;
+        }
+        .loading {
+            color: green;
+        }
+        .countdown {
+            color: yellow;
+            font-size: 20px;
+            text-align: center;
+        }
+        .countdown span {
+            font-size: 30px;
+            color: red;
+        }
+        .ip-list {
+            color: red;
+        }
+        .warning {
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>██████╗ ███████╗██╗  ██╗███████╗██╗  ██╗</h1>
+        <h1>██╔══██╗██╔════╝██║  ██║██╔════╝██║ ██╔╝</h1>
+        <h1>██║  ██║█████╗  ███████║█████╗  █████╔╝</h1>
+        <h1>██║  ██║██╔══╝  ██╔══██║██╔══╝  ██╔═██╗</h1>
+        <h1>██████╔╝███████╗██║  ██║███████╗██║  ██╗</h1>
+        <h1>╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝</h1>
+        <p>HACKING IN PROGRESS...</p>
+    </div>
+
+    <div class="loading" id="loading-message"></div>
+
+    <div class="ip-list" id="ip-list"></div>
+
+    <div class="warning" id="warning"></div>
+
+    <div class="countdown" id="countdown"></div>
+
+    <script>
+        // وظيفة محاكاة تحميل زائف
+        function fakeLoading(message, duration = 5) {
+            const loadingMessage = document.getElementById('loading-message');
+            loadingMessage.innerHTML = "[+] " + message;
+            let progress = '';
+            let count = 0;
+            const interval = setInterval(() => {
+                progress += '█';
+                loadingMessage.innerHTML = "[+] " + message + " " + progress;
+                count++;
+                if (count >= duration) {
+                    clearInterval(interval);
+                    loadingMessage.innerHTML = "";
+                }
+            }, 500);
+        }
+
+        // توليد عناوين IP عشوائية
+        function randomIPs() {
+            return `${Math.floor(Math.random() * 255) + 1}.${Math.floor(Math.random() * 255) + 1}.${Math.floor(Math.random() * 255) + 1}.${Math.floor(Math.random() * 255) + 1}`;
+        }
+
+        // عد تنازلي مخيف
+        function countdown(seconds) {
+            let countdownElement = document.getElementById('countdown');
+            countdownElement.innerHTML = "<span>[!]</span> WARNING: Self-destruction in progress!";
+            let interval = setInterval(() => {
+                countdownElement.innerHTML = `<span>${seconds}</span> seconds remaining...`;
+                seconds--;
+                if (seconds < 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = "<span>[!]</span> SYSTEM SHUTTING DOWN...";
+                }
+            }, 1000);
+        }
+
+        // وظيفة لمحاكاة عملية الاختراق
+        function hackingSimulation() {
+            fakeLoading("Connecting to secure server");
+            setTimeout(() => {
+                fakeLoading("Accessing victim's device");
+                setTimeout(() => {
+                    let ipList = document.getElementById('ip-list');
+                    for (let i = 0; i < 5; i++) {
+                        let ip = randomIPs();
+                        ipList.innerHTML += `<p>[!] Hacking IP: ${ip}</p>`;
+                    }
+                    fakeLoading("Downloading critical data");
+                    setTimeout(() => {
+                        countdown(10);
+                    }, 2000);
+                }, 5000);
+            }, 5000);
+        }
+
+        // بدء المحاكاة
+        hackingSimulation();
+    </script>
+</body>
+</html>
